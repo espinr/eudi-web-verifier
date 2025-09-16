@@ -134,7 +134,7 @@ export const PID_SD_JWT_VC_ATTRIBUTE_MAP: { [id: string]: string } = {
 }
 
 export const ATTESTATIONS_BY_FORMAT: { [id: string]: Attestation[] } = {
-  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, PHOTO_ID_MSO_MDOC, EHIC_MSO_MDOC, PDA1_MSO_MDOC],
+  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, PHOTO_ID_MSO_MDOC, EHIC_MSO_MDOC, PDA1_MSO_MDOC, SPORTS_MSO_MDOC],
   "dc+sd-jwt": [PID_SD_JWT_VC, EHIC_SD_JWT_VC, PDA1_SD_JWT_VC, EHIC_SD_JWT_VC_DC4EU]
 }
 
