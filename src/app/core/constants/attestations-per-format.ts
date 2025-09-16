@@ -1,5 +1,5 @@
 import {Attestation, MsoMdocAttestation, SdJwtVcAttestation} from "@core/models/attestation/Attestations";
-import {EHIC_ATTESTATION, EHIC_ATTESTATION_DC4EU, MDL_ATTESTATION, PDA1_ATTESTATION, PHOTO_ID_ATTESTATION, PID_ATTESTATION} from "@core/constants/attestation-definitions";
+import {EHIC_ATTESTATION, EHIC_ATTESTATION_DC4EU, MDL_ATTESTATION, PDA1_ATTESTATION, PHOTO_ID_ATTESTATION, PID_ATTESTATION, SPORTS_ATTESTATION} from "@core/constants/attestation-definitions";
 import {AttestationFormat} from "@core/models/attestation/AttestationFormat";
 import {AttestationType} from "@core/models/attestation/AttestationType";
 import {DataElement} from "@core/models/attestation/AttestationDefinition";
@@ -17,6 +17,15 @@ export const MDL_MSO_MDOC: MsoMdocAttestation = {
   doctype: 'org.iso.18013.5.1.mDL',
   namespace: 'org.iso.18013.5.1',
   claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('org.iso.18013.5.1', attribute.identifier) }
+}
+
+/*---- SPORTS LICENSE ATTESTATION INSTANCES PER FORMAT ----*/
+export const SPORTS_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: SPORTS_ATTESTATION,
+  doctype: 'net.openathletics.licence.1',
+  namespace: 'net.openathletics.licence.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('net.openathletics.licence.1', attribute.identifier) }
 }
 
 /*---- PID ATTESTATION INSTANCES PER FORMAT ----*/

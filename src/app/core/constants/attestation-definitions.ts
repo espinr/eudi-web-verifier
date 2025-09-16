@@ -160,11 +160,43 @@ export const PDA1_ATTESTATION: AttestationDefinition = {
   ]
 }
 
+export const SPORTS_ATTESTATION: AttestationDefinition = {
+  name: "Athlete License",
+  type: AttestationType.ATHLETE_LICENSE,
+  dataSet: [
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'given_name', attribute: 'Given name'},
+    { identifier: 'birth_date', attribute: 'Birthdate'},
+    { identifier: 'nationality', attribute: 'Nationality'},
+    { identifier: 'contact_information', attribute: 'Contact information', nested: [
+      { identifier: 'email_address', attribute: 'Email address'},
+      { identifier: 'phone', attribute: 'Phone number'},
+      { identifier: 'full_address', attribute: 'Full address'},
+      { identifier: 'postal_code', attribute: 'Postal code'},
+      { identifier: 'locality', attribute: 'Locality'},
+      { identifier: 'country', attribute: 'Country'}
+    ]},
+    { identifier: 'gender', attribute: 'Gender'},
+    { identifier: 'age_birth_year', attribute: 'Birth year'},
+    { identifier: 'age_in_years', attribute: 'Age in years'},
+    { identifier: 'category', attribute: 'Category'},
+    { identifier: 'club_name', attribute: 'Club'},
+    { identifier: 'document_number', attribute: 'License number'},
+    { identifier: 'issuance_date', attribute: 'Issuance date'},
+    { identifier: 'expiry_date', attribute: 'Expiry date'}, 
+    { identifier: 'qualified_competitor_nationals_2025', attribute: 'Qualified for Utopian Nationals 2025'},
+    { identifier: 'qualified_competitor_euro_2026', attribute: 'Qualified for Euro 2026'},
+    { identifier: 'age_over_18', attribute: 'Age over 18'},
+    { identifier: 'portrait', attribute: 'Portrait'}
+  ]
+}
+
 export const SUPPORTED_ATTESTATIONS: { [id: string]: AttestationDefinition } = {
   "pid": PID_ATTESTATION,
   "mdl": MDL_ATTESTATION,
   "photo_id": PHOTO_ID_ATTESTATION,
   "ehic": EHIC_ATTESTATION,
   "ehic-dc4eu": EHIC_ATTESTATION_DC4EU,
-  "pda1": PDA1_ATTESTATION
+  "pda1": PDA1_ATTESTATION,
+  "athlete_license": SPORTS_ATTESTATION
 }
