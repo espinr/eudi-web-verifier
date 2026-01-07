@@ -109,7 +109,7 @@ export const SPORTS_DIPLOMA_SD_JWT_VC: SdJwtVcAttestation = {
   format: AttestationFormat.SD_JWT_VC,
   attestationDef: SPORTS_DIPLOMA_ATTESTATION,
   vct: "urn:net.openathletics:diploma:1:1",
-  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.LEARNING_CREDENTIAL) } }
+  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.SPORTS_DIPLOMA) } }
 }
 
 
