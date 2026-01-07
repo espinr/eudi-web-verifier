@@ -160,11 +160,82 @@ export const PDA1_ATTESTATION: AttestationDefinition = {
   ]
 }
 
+export const SPORTS_LICENSE_ATTESTATION: AttestationDefinition = {
+  name: "Athlete License",
+  type: AttestationType.SPORTS_LICENSE,
+  dataSet: [
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'given_name', attribute: 'Given name'},
+    { identifier: 'birth_date', attribute: 'Birthdate'},
+    { identifier: 'nationality', attribute: 'Nationalities'},
+    { identifier: 'email_address', attribute: 'Email address'},
+    { identifier: 'phone', attribute: 'Phone'},
+    { identifier: 'full_address', attribute: 'Full address'},
+    { identifier: 'postal_code', attribute: 'Postal code'},
+    { identifier: 'locality', attribute: 'Locality'},
+    { identifier: 'country', attribute: 'Country'},
+    { identifier: 'gender', attribute: 'Gender'},
+    { identifier: 'age_in_years', attribute: 'Age in years'},
+    { identifier: 'age_birth_year', attribute: 'Age birth year'},
+    { identifier: 'category', attribute: 'Category'},
+    { identifier: 'club_name', attribute: 'Club or team'},
+    { identifier: 'document_number', attribute: 'License number'},
+    { identifier: 'issuance_date', attribute: 'Issue date'},
+    { identifier: 'expiry_date', attribute: 'Expiry date'},
+    { identifier: 'eu_scope_license', attribute: 'Participation in EU competitions'},
+    { identifier: 'aui_banned', attribute: 'Athletics Integrity Unit Ban'},
+    { identifier: 'qualified_competitor_nationals_2026', attribute: 'Qualified for Utopian Nationals 2026'},
+    { identifier: 'portrait', attribute: 'Portrait'}
+  ]
+}
+
+export const SPORTS_FAN_ATTESTATION: AttestationDefinition = {
+  name: "Fan Loyalty",
+  type: AttestationType.SPORTS_FAN,
+  dataSet: [
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'given_name', attribute: 'Given name'},
+    { identifier: 'nationality', attribute: 'Nationalities'},
+    { identifier: 'fan_id', attribute: 'Fan ID'},
+    { identifier: 'issuance_date', attribute: 'Issue date'},
+    { identifier: 'expiry_date', attribute: 'Expiry date'},
+    { identifier: 'portrait', attribute: 'Portrait'}
+  ]
+}
+
+export const SPORTS_DIPLOMA_ATTESTATION: AttestationDefinition = {
+  name: "Sports Diploma",
+  type: AttestationType.SPORTS_DIPLOMA,
+  dataSet: [
+    { identifier: 'identifier', attribute: 'Identifier'},
+    { identifier: 'competition', attribute: 'Competition under scope'},
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'first_name', attribute: 'Given name'},
+    { identifier: 'display_name', attribute: 'Display name'},
+    { identifier: 'date_of_competition', attribute: 'Date of competition'}
+  ]
+}
+
+export const SPORTS_HEALTH_ATTESTATION: AttestationDefinition = {
+  name: "Health self-declaration",
+  type: AttestationType.SPORTS_HEALTH,
+  dataSet: [
+    { identifier: 'issuance_date', attribute: 'Issuance date'},
+    { identifier: 'expiry_date', attribute: 'Expiry date'},
+    { identifier: 'issuing_country', attribute: 'Issuing country' },
+    { identifier: 'issuing_authority', attribute: 'Issuing authority'}
+  ]
+}
+
 export const SUPPORTED_ATTESTATIONS: { [id: string]: AttestationDefinition } = {
   "pid": PID_ATTESTATION,
-  "mdl": MDL_ATTESTATION,
-  "photo_id": PHOTO_ID_ATTESTATION,
-  "ehic": EHIC_ATTESTATION,
-  "ehic-dc4eu": EHIC_ATTESTATION_DC4EU,
-  "pda1": PDA1_ATTESTATION
+//  "mdl": MDL_ATTESTATION,
+//  "photo_id": PHOTO_ID_ATTESTATION,
+//  "ehic": EHIC_ATTESTATION,
+//  "ehic-dc4eu": EHIC_ATTESTATION_DC4EU,
+//  "pda1": PDA1_ATTESTATION,
+"sports_license": SPORTS_LICENSE_ATTESTATION,
+"sports_fan": SPORTS_FAN_ATTESTATION,
+"sports_health": SPORTS_HEALTH_ATTESTATION,
+"sports_diploma": SPORTS_DIPLOMA_ATTESTATION  
 }

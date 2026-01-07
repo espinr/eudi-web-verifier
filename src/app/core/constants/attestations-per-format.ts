@@ -1,5 +1,5 @@
 import {Attestation, MsoMdocAttestation, SdJwtVcAttestation} from "@core/models/attestation/Attestations";
-import {EHIC_ATTESTATION, EHIC_ATTESTATION_DC4EU, MDL_ATTESTATION, PDA1_ATTESTATION, PHOTO_ID_ATTESTATION, PID_ATTESTATION} from "@core/constants/attestation-definitions";
+import {EHIC_ATTESTATION, EHIC_ATTESTATION_DC4EU, MDL_ATTESTATION, PDA1_ATTESTATION, PHOTO_ID_ATTESTATION, PID_ATTESTATION, SPORTS_DIPLOMA_ATTESTATION, SPORTS_FAN_ATTESTATION, SPORTS_HEALTH_ATTESTATION, SPORTS_LICENSE_ATTESTATION} from "@core/constants/attestation-definitions";
 import {AttestationFormat} from "@core/models/attestation/AttestationFormat";
 import {AttestationType} from "@core/models/attestation/AttestationType";
 import {DataElement} from "@core/models/attestation/AttestationDefinition";
@@ -79,13 +79,50 @@ export const PDA1_SD_JWT_VC: SdJwtVcAttestation = {
   claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.PDA1) } }
 }
 
+
+/*---- SPORTS ATTESTATION INSTANCES ----*/
+export const SPORTS_LICENSE_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: SPORTS_LICENSE_ATTESTATION,
+  doctype: 'net.openathletics.license.1',
+  namespace: 'net.openathletics.license.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('net.openathletics.license.1', attribute.identifier) }
+}
+
+export const SPORTS_FAN_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: SPORTS_FAN_ATTESTATION,
+  doctype: 'net.openathletics.fan.1',
+  namespace: 'net.openathletics.fan.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('net.openathletics.fan.1', attribute.identifier) }
+}
+
+export const SPORTS_HEALTH_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: SPORTS_HEALTH_ATTESTATION,
+  doctype: 'net.openathletics.health.1',
+  namespace: 'net.openathletics.health.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('net.openathletics.health.1', attribute.identifier) }
+}
+
+export const SPORTS_DIPLOMA_SD_JWT_VC: SdJwtVcAttestation = {
+  format: AttestationFormat.SD_JWT_VC,
+  attestationDef: SPORTS_DIPLOMA_ATTESTATION,
+  vct: "urn:net.openathletics:diploma:1:1",
+  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.LEARNING_CREDENTIAL) } }
+}
+
+
 function resolveAttribute(attribute: DataElement, attestationType: AttestationType): string {
   let resolvedAttribute = attribute.identifier
   if (attestationType === AttestationType.PID) {
     let mappedAttribute = PID_SD_JWT_VC_ATTRIBUTE_MAP[attribute.identifier];
     resolvedAttribute = mappedAttribute || attribute.identifier;
   }
-
+  if (attestationType === AttestationType.SPORTS_LICENSE) {
+    let mappedAttribute = SPORTS_LICENSE_ATTRIBUTE_MAP[attribute.identifier];
+    resolvedAttribute = mappedAttribute || attribute.identifier;
+  }
   return resolvedAttribute;
 }
 
@@ -124,9 +161,16 @@ export const PID_SD_JWT_VC_ATTRIBUTE_MAP: { [id: string]: string } = {
   "portrait": "picture"
 }
 
+export const SPORTS_LICENSE_ATTRIBUTE_MAP: { [id: string]: string } = {
+  "full_address": "contact_information.full_address",
+  "postal_code": "contact_information.postal_code",
+  "locality": "contact_information.locality",
+  "country": "contact_information.country"
+}
+
 export const ATTESTATIONS_BY_FORMAT: { [id: string]: Attestation[] } = {
-  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, PHOTO_ID_MSO_MDOC, EHIC_MSO_MDOC, PDA1_MSO_MDOC],
-  "dc+sd-jwt": [PID_SD_JWT_VC, EHIC_SD_JWT_VC, PDA1_SD_JWT_VC, EHIC_SD_JWT_VC_DC4EU]
+  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, PHOTO_ID_MSO_MDOC, EHIC_MSO_MDOC, PDA1_MSO_MDOC, SPORTS_FAN_MSO_MDOC, SPORTS_HEALTH_MSO_MDOC, SPORTS_LICENSE_MSO_MDOC],
+  "dc+sd-jwt": [PID_SD_JWT_VC, EHIC_SD_JWT_VC, PDA1_SD_JWT_VC, EHIC_SD_JWT_VC_DC4EU, SPORTS_DIPLOMA_SD_JWT_VC]
 }
 
 export const getAttestationByFormatAndType =
