@@ -9,6 +9,7 @@ import {ActionCode} from '@shared/elements/body-actions/models/ActionCode';
 import {VerifierEndpointService} from "@core/services/verifier-endpoint.service";
 import {TransactionInitializationRequest} from "@core/models/TransactionInitializationRequest";
 import { DataService } from '@app/core/services/data-service';
+import predefinedPresentationJson from '../../../../assets/vcp-registration.json' ;
 
 @Component({
     selector: 'vc-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   actions: BodyAction[] = PRESENTATION_ACTIONS;
   requestCode = '';
+  vcpPredefinedJson: JSON = JSON.parse("{}");
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -61,7 +63,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (data.code === ActionCode.BACK) {
       this.navigateService.goBack();
     } else if (data.code === ActionCode.NEXT) {
-      this.initializePresentationTransaction();
+      //this.initializePresentationTransaction();
+      this.initializePresentationTransactionPredefined();
     }
   }
 
@@ -76,6 +79,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       console.error('invalid JSON format');
     }
+  }
+
+  initializePresentationTransactionPredefined() {
+    let request = predefinedPresentationJson as TransactionInitializationRequest;
+    this.verifierEndpointService.initializeTransaction(request, (_) => {
+      this.hideNextStep();
+      this.navigateService.navigateTo('/custom-request/invoke');
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   private disableNextButton(code: string) {

@@ -1,0 +1,83 @@
+{
+    "type": "vp_token",
+    "dcql_query": {
+      "credentials": [
+        {
+          "id": "query_0",
+          "format": "mso_mdoc",
+          "meta": {
+            "doctype_value": "net.openathletics.license.1"
+          },
+          "claims": [
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "family_name"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "given_name"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "expiry_date"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "aui_banned"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "qualified_competitor_nationals_2026"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "portrait"
+              ],
+              "intent_to_retain": false
+            }
+          ]
+        },
+        {
+          "id": "query_1",
+          "format": "mso_mdoc",
+          "meta": {
+            "doctype_value": "net.openathletics.health.1"
+          },
+          "claims": [
+            {
+              "path": [
+                "net.openathletics.health.1",
+                "expiry_date"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.health.1",
+                "issuing_authority"
+              ],
+              "intent_to_retain": false
+            }
+          ]
+        }
+      ]
+    },
+    "nonce": "1234567890",
+    "request_uri_method": "get"
+  }
