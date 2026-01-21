@@ -15,6 +15,7 @@ import { DialogData } from '@features/invoke-sports-wallet/components/view-attes
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { CredentialDictionaryService } from '@app/core/services/credential-dictionary.service';
 
 @Component({
   selector: 'vc-view-attestation',
@@ -36,9 +37,17 @@ import { MatDividerModule } from '@angular/material/divider';
 export class ViewAttestationComponent implements OnInit {
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   attestation!: Single;
+  credentialDictionary!: CredentialDictionaryService;
+
 
   ngOnInit(): void {
     this.attestation = this.data.attestation;
+    this.credentialDictionary = new CredentialDictionaryService();
+
+  }
+
+  prettyNameAttestation(code: string) {
+    return this.credentialDictionary.getAttribute(code);
   }
 
   isJson(str: string): boolean {

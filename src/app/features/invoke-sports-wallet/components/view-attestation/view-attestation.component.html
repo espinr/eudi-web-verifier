@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{attestation.name}}</h2>
+<h2 mat-dialog-title>{{prettyNameAttestation(attestation.name)}}</h2>
 
 <mat-dialog-content class="mat-typography">
   <mat-tab-group>
@@ -8,7 +8,7 @@
         <ng-container *ngFor="let option of attestation.attributes; trackBy: trackByFn">
           <mat-list-item>
             <span matListItemTitle>
-              <strong>{{option.key}}</strong>
+              <strong>{{prettyNameAttestation(option.key)}}</strong>
             </span>
             <span matListItemLine style="display: flex">
               <ng-container *ngIf="isJson(option.value); else plainText">
@@ -29,7 +29,7 @@
           <ng-container *ngIf="isObject(value)">
             <ng-container *ngFor="let item of objectToKeyValue(value); trackBy: trackByFn">
               <div class="nested-item">
-                <div class="nested-key"><strong>{{item.key}}</strong></div>
+                <div class="nested-key"><strong>{{prettyNameAttestation(item.key)}}</strong></div>
                 <div class="nested-value">
                   <ng-container *ngIf="isObject(item.value) || isArray(item.value)">
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.value }"></ng-container>
@@ -64,7 +64,7 @@
       <mat-list>
         <mat-list-item *ngFor="let option of attestation.metadata">
           <span matListItemTitle>
-            <strong>{{option.key}}</strong>
+            <strong>{{prettyNameAttestation(option.key)}}</strong>
           </span>
           <span matListItemLine>
             <span [innerHTML]="option.value"></span>
