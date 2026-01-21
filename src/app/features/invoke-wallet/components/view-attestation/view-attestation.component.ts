@@ -64,12 +64,15 @@ export class ViewAttestationComponent implements OnInit {
   }
 
   isObject(value: any): boolean {
-    console.log(JSON.stringify(value));
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
 
+  // Date is in {'value':'YYYY-MM-DD'} format
+  isDate(key: string, value:any): boolean {
+    return value !== null && typeof value === 'object' && key.includes('expiry_date') && value.containsKey('value');
+  }
+
   isArray(value: any): boolean {
-    console.log(JSON.stringify(value));
     return Array.isArray(value);
   }
 

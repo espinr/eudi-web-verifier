@@ -12,7 +12,12 @@
             </span>
             <span matListItemLine class="attribute-value">
               <ng-container *ngIf="isJson(option.value); else plainText">
-                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
+                <ng-container *ngIf="isDate(option.key, option.value); else regularJson">
+                    <span [innerHTML]="option.value" style="display: flex; padding-top: 1em"></span>
+                </ng-container>
+                <ng-template #regularJson>
+                  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
+                </ng-template>
               </ng-container>
               <ng-template #plainText>
                 <span [innerHTML]="option.value" style="display: flex; padding-top: 1em"></span>
