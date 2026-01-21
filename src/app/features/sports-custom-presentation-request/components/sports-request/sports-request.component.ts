@@ -11,7 +11,6 @@ import { SharedModule } from '@app/shared/shared.module';
 })
 export class SportsRequestComponent {
 
-	invalidJSON = true;
 	constructor (
     //private readonly dataService: DataService
 	) {}

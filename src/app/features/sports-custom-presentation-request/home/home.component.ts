@@ -8,7 +8,6 @@ import {PRESENTATION_ACTIONS} from '@core/constants/pages-actions';
 import {ActionCode} from '@shared/elements/body-actions/models/ActionCode';
 import {VerifierEndpointService} from "@core/services/verifier-endpoint.service";
 import {TransactionInitializationRequest} from "@core/models/TransactionInitializationRequest";
-import { DataService } from '@app/core/services/data-service';
 import predefinedPresentationJson from '../../../../assets/vcp-registration.json' ;
 
 @Component({
@@ -49,6 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.changeDetectorRef.detectChanges();
         }
       });
+    this.enableNextButton();
   }
 
   runActions(data: BodyAction) {
@@ -71,4 +71,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   private hideNextStep() {
     this.actions = this.actions.filter((item: BodyAction) => item.code !== ActionCode.NEXT);
   }
+
+  private enableNextButton() {
+    [...this.actions].map((item: BodyAction) => {
+      if (item.code == ActionCode.NEXT) {
+        item.disabled = false;
+      }
+      return item;
+    });
+  }
+  
+
 }
