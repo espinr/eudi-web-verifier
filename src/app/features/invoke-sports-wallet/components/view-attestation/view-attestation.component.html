@@ -7,10 +7,10 @@
       <mat-list>
         <ng-container *ngFor="let option of attestation.attributes; trackBy: trackByFn">
           <mat-list-item>
-            <span matListItemTitle>
+            <span class="attribute-key" matListItemTitle>
               <strong>{{prettyNameAttestation(option.key)}}</strong>
             </span>
-            <span matListItemLine style="display: flex">
+            <span matListItemLine class="attribute-value">
               <ng-container *ngIf="isJson(option.value); else plainText">
                 <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
               </ng-container>

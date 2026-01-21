@@ -64,10 +64,12 @@ export class ViewAttestationComponent implements OnInit {
   }
 
   isObject(value: any): boolean {
+    console.log(JSON.stringify(value));
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
 
   isArray(value: any): boolean {
+    console.log(JSON.stringify(value));
     return Array.isArray(value);
   }
 
