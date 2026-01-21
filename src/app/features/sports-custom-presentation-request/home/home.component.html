@@ -1,0 +1,9 @@
+<vc-wallet-layout>
+  <div body >
+    <h5>Register with your Sports Wallet </h5>
+    <div class="wrapper">
+        <router-outlet></router-outlet>
+    </div>
+    <vc-body-actions [actions]="actions" (clicked)="runActions($event)"></vc-body-actions>
+  </div>
+</vc-wallet-layout>

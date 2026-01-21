@@ -22,6 +22,13 @@ const routes: Routes = [
       ).then((m) => m.CustomPresentationRequestModule),
   },
   {
+    path: 'custom-sports',
+    loadChildren: () =>
+      import(
+        '@features/sports-custom-presentation-request/sports-custom-presentation-request.module'
+      ).then((m) => m.SportsCustomPresentationRequestModule),
+  },
+  {
     path: 'invoke-wallet',
     loadChildren: () =>
       import('@features/invoke-wallet/invoke-wallet.module').then(
