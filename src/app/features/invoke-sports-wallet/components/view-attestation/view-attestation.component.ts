@@ -97,23 +97,14 @@ export class ViewAttestationComponent implements OnInit {
   parseDate(value: string): any {
     try {
       let json = JSON.parse(value);
-      return json.value;
+      let parsedDate = Date.parse(json.value);
+      let isValidEmoji = parsedDate > Date.now()? '✅' : '❌';     
+      return `${json.value} ${isValidEmoji} `;
     } catch (e) {
       console.error('Invalid JSON string:', value);
     }
     return '-';
   }
-  
-  isFutureDate(date: string): any {
-    try {
-      let parsedDate = Date.parse(date);
-      return parsedDate > Date.now();
-    } catch (e) {
-      console.error('Invalid date:', date);
-    }
-    return false;
-  }
-
 
   isObject(value: any): boolean {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
