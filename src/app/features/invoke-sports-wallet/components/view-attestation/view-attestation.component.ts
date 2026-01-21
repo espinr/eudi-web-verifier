@@ -76,7 +76,8 @@ export class ViewAttestationComponent implements OnInit {
   isDate(key: string, value:any): boolean {
     try {
       let json = JSON.parse(value);
-      console.info(`Key ${key}, value: ${value}`);
+      console.info(`Is this date? Key ${key}, value: ${value}`);
+      console.info(`${key.includes('expiry_date')}, value: ${json.containsKey('value')}`);
       return key.includes('expiry_date') && json.containsKey('value');      
     } catch (e) {
       return false;
@@ -87,6 +88,7 @@ export class ViewAttestationComponent implements OnInit {
   parseDate(value: string): any {
     try {
       let json = JSON.parse(value);
+      console.info(`Parsing date value: ${json.value}`);
       return json.value;
     } catch (e) {
       console.error('Invalid JSON string:', value);
