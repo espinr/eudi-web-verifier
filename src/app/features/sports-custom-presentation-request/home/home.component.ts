@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         filter((event): event is NavigationEnd => event instanceof NavigationEnd)
       )
       .subscribe((event) => {
-        if (event.url.includes('sports-request/create')) {
+        if (event.url.includes('custom-sports/create')) {
           this.actions = PRESENTATION_ACTIONS;
           this.changeDetectorRef.detectChanges();
         }
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     let request = predefinedPresentationJson as TransactionInitializationRequest;
     this.verifierEndpointService.initializeTransaction(request, (_) => {
       this.hideNextStep();
-      this.navigateService.navigateTo('/sports-request/invoke');
+      this.navigateService.navigateTo('/custom-sports/invoke');
       this.changeDetectorRef.detectChanges();
     });
   }
