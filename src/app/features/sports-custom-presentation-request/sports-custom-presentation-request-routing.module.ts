@@ -18,7 +18,7 @@ const routes: Routes = [
 			},
 			{
 				path: 'invoke',
-				loadComponent: () => import('@features/invoke-wallet/components/invoker/invoker.component')
+				loadComponent: () => import('@features/invoke-sports-wallet/components/invoker/invoker.component')
           .then(c => c.InvokerComponent)
 			}
 		]

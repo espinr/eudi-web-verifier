@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject();
   actions: BodyAction[] = PRESENTATION_ACTIONS;
-  vcpPredefinedJson: JSON = JSON.parse("{}");
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
