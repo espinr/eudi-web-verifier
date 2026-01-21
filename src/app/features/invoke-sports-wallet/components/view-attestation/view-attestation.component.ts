@@ -109,7 +109,7 @@ export class ViewAttestationComponent implements OnInit {
       let parsedDate = Date.parse(date);
       return parsedDate > Date.now();
     } catch (e) {
-      console.error('Invalid date:', value);
+      console.error('Invalid date:', date);
     }
     return false;
   }
@@ -143,7 +143,7 @@ export class ViewAttestationComponent implements OnInit {
       }
     
       console.info(JSON.stringify(bufferObj));
-      
+
       // Convert byte array to binary string
       const binaryString = bufferObj.data
         .map((byte: number) => String.fromCharCode(byte))
