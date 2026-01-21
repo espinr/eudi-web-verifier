@@ -22,12 +22,12 @@
                       </ng-template>  
                     </span>
                 </ng-container>
-                <ng-container *ngIf="!isDate(option.key, option.value) && isPicture(option.key, option.value); else regularJson">
+                <ng-container *ngIf="!isDate(option.key, option.value) && isPicture(option.key, option.value)">
                   <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
                 </ng-container>
-                <ng-template #regularJson>
+                <ng-container *ngIf="!isDate(option.key, option.value) && !isPicture(option.key, option.value)">
                   <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
-                </ng-template>
+                </ng-container>
               </ng-container>
               <ng-template #plainText>
                 <span [innerHTML]="option.value" style="display: flex; padding-top: 1em"></span>
