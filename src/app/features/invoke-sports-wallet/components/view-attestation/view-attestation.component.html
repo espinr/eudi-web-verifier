@@ -15,16 +15,16 @@
                 <ng-container *ngIf="isDate(option.key, option.value)">
                     <span class="date" [innerHTML]="parseDate(option.value)" style="display: flex; padding-top: 1em"></span>
                     <ng-container *ngIf="isFutureDate(parseDate(option.value)); else noFutureDate">
-                      <span class="valid" [innerHTML]="✅"></span>
+                      <span class="valid" [innerHTML]="YES"></span>
                     </ng-container>
                     <ng-template #noFutureDate>
-                      <span class="valid" [innerHTML]="❌"></span>
+                      <span class="valid" [innerHTML]="NO"></span>
                     </ng-template>
                 </ng-container>
                 <ng-container *ngIf="isPicture(option.key, option.value); else regularJson">
                   <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
                 </ng-container>
-              <ng-template #regularJson>
+                <ng-template #regularJson>
                   <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
                 </ng-template>
               </ng-container>
