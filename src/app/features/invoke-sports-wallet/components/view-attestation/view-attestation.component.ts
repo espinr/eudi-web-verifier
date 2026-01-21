@@ -134,16 +134,13 @@ export class ViewAttestationComponent implements OnInit {
    // Portrait comes in format: {"type":"Buffer","data": format
   getImageFromBuffer(value: any): string {
     try {
-      let json = JSON.parse(value);
-      let bufferObj = json.data;
+      let bufferObj = JSON.parse(value);
   
       // Validate input
       if (!bufferObj || typeof bufferObj !== 'object' || !Array.isArray(bufferObj.data)) {
         throw new Error('Invalid Buffer object format');
       }
     
-      console.info(JSON.stringify(bufferObj));
-
       // Convert byte array to binary string
       const binaryString = bufferObj.data
         .map((byte: number) => String.fromCharCode(byte))
@@ -156,6 +153,8 @@ export class ViewAttestationComponent implements OnInit {
       return `data:image/jpeg;base64,${base64String}`;
     } catch (e) {
       console.error('Invalid JSON:', value);
+      console.error('message:', e);
+
     }
     return '';
   }
