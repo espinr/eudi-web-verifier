@@ -12,10 +12,19 @@
             </span>
             <span matListItemLine class="attribute-value">
               <ng-container *ngIf="isJson(option.value); else plainText">
-                <ng-container *ngIf="isDate(option.key, option.value); else regularJson">
-                    <em class="date" [innerHTML]="parseDate(option.value)" style="display: flex; padding-top: 1em"></em>
+                <ng-container *ngIf="isDate(option.key, option.value)">
+                    <span class="date" [innerHTML]="parseDate(option.value)" style="display: flex; padding-top: 1em"></span>
+                    <ng-container *ngIf="isFutureDate(parseDate(option.value)); else noFutureDate">
+                      <span class="valid" [innerHTML]="✅"></span>
+                    </ng-container>
+                    <ng-template #noFutureDate>
+                      <span class="valid" [innerHTML]="❌"></span>
+                    </ng-template>
                 </ng-container>
-                <ng-template #regularJson>
+                <ng-container *ngIf="isPicture(option.key, option.value); else regularJson">
+                  <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
+                </ng-container>
+              <ng-template #regularJson>
                   <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
                 </ng-template>
               </ng-container>

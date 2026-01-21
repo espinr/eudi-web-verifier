@@ -76,22 +76,27 @@ export class ViewAttestationComponent implements OnInit {
   isDate(key: string, value:any): boolean {
     try {
       let json = JSON.parse(value);
-      console.info(`Date? Key ${key}, value: ${value}`);
-      console.info(`json ${JSON.stringify(json)}`);
-      console.info(` ${key.indexOf('expiry_date')}`);
-      console.info(json.hasOwnProperty('value'))
       return key.includes('expiry_date') && json.hasOwnProperty('value');      
     } catch (e) {
       console.error('Error parsing the JSON');
       return false;
     }
-    
+  }
+
+  // Portrait {"type":"Buffer","data": format
+  isPicture(key: string, value:any): boolean {
+    try {
+      let json = JSON.parse(value);
+      return key.includes('portrait') && json.hasOwnProperty('type') && json.hasOwnProperty('data');      
+    } catch (e) {
+      console.error('Error parsing the JSON');
+      return false;
+    }
   }
 
   parseDate(value: string): any {
     try {
       let json = JSON.parse(value);
-      console.info(`Parsing date value: ${json.value}`);
       return json.value;
     } catch (e) {
       console.error('Invalid JSON string:', value);
@@ -99,6 +104,17 @@ export class ViewAttestationComponent implements OnInit {
     return '-';
   }
   
+  isFutureDate(date: string): any {
+    try {
+      let parsedDate = Date.parse(date);
+      return parsedDate > Date.now();
+    } catch (e) {
+      console.error('Invalid date:', value);
+    }
+    return false;
+  }
+
+
   isObject(value: any): boolean {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
@@ -113,5 +129,34 @@ export class ViewAttestationComponent implements OnInit {
 
   trackByFn(index: number, data: any) {
     return data.key + index;
+  }
+
+   // Portrait comes in format: {"type":"Buffer","data": format
+  getImageFromBuffer(value: any): string {
+    try {
+      let json = JSON.parse(value);
+      let bufferObj = json.data;
+  
+      // Validate input
+      if (!bufferObj || typeof bufferObj !== 'object' || !Array.isArray(bufferObj.data)) {
+        throw new Error('Invalid Buffer object format');
+      }
+    
+      console.info(JSON.stringify(bufferObj));
+      
+      // Convert byte array to binary string
+      const binaryString = bufferObj.data
+        .map((byte: number) => String.fromCharCode(byte))
+        .join('');
+      
+      // Convert to base64
+      const base64String = btoa(binaryString);
+      
+      // Return as JPEG data URL (adjust MIME type if needed)
+      return `data:image/jpeg;base64,${base64String}`;
+    } catch (e) {
+      console.error('Invalid JSON:', value);
+    }
+    return '';
   }
 }
