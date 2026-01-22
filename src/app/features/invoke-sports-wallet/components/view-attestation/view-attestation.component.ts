@@ -12,6 +12,7 @@ import { Single } from '@core/models/presentation/PresentedAttestation';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from "@angular/material/card";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import {AttestationFormat} from "@core/models/attestation/AttestationFormat";
@@ -25,6 +26,7 @@ import { CredentialDictionaryService } from '@app/core/services/credential-dicti
     MatExpansionModule,
     MatListModule,
     MatButtonModule,
+    MatCardModule,
     MatTabsModule,
     MatDividerModule,
   ],
