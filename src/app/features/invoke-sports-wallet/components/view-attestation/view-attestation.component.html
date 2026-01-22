@@ -1,84 +1,71 @@
-<h4 mat-dialog-title>{{prettyNameAttestation(attestation.name)}}</h4>
-
-<div class="mat-typography">
-  <mat-tab-group>
-    <mat-tab label="Attributes">
-      <!-- Main attribute list -->
-      <mat-list>
-        <ng-container *ngFor="let option of attestation.attributes; trackBy: trackByFn">
-          <mat-list-item>
-            <span class="attribute-key" matListItemTitle>
-              <strong>{{prettyNameAttestation(option.key)}}</strong>
-            </span>
-            <span matListItemLine class="attribute-value">
-              <ng-container *ngIf="isJson(option.value); else plainText">
-                <ng-container *ngIf="isDate(option.key, option.value)">
-                    <span class="date" [innerHTML]="parseDate(option.value)" style="display: flex; padding-top: 1em"></span>
+<mat-card appearance="outlined" class="mat-typography">
+  <mat-card-header>
+    <mat-card-title>{{ prettyNameAttestation(attestation.name) }}</mat-card-title>
+    <mat-card-subtitle>
+      in <i> {{ attestation.format }} </i> format</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+        <mat-list>
+          <ng-container *ngFor="let option of attestation.attributes; trackBy: trackByFn">
+            <mat-list-item>
+              <span class="attribute-key" matListItemTitle>
+                <strong>{{prettyNameAttestation(option.key)}}</strong>
+              </span>
+              <span matListItemLine class="attribute-value">
+                <ng-container *ngIf="isJson(option.value); else plainText">
+                  <ng-container *ngIf="isDate(option.key, option.value)">
+                      <span class="date" [innerHTML]="parseDate(option.value)" style="display: flex; padding-top: 1em"></span>
+                  </ng-container>
+                  <ng-container *ngIf="!isDate(option.key, option.value) && isPicture(option.key, option.value)">
+                    <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
+                  </ng-container>
+                  <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value))">
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
+                  </ng-container>
                 </ng-container>
-                <ng-container *ngIf="!isDate(option.key, option.value) && isPicture(option.key, option.value)">
-                  <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
-                </ng-container>
-                <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value))">
-                  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
-                </ng-container>
-              </ng-container>
-              <ng-template #plainText>
-                <span [innerHTML]="option.value" style="display: flex; padding-top: 1em"></span>
-              </ng-template>
-            </span>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-        </ng-container>
-      </mat-list>
-
-      <!-- Recursive template for nested lists -->
-      <ng-template #recursiveList let-value>
-        <mat-list class="nested-list">
-          <ng-container *ngIf="isObject(value)">
-            <ng-container *ngFor="let item of objectToKeyValue(value); trackBy: trackByFn">
-              <div class="nested-item">
-                <div class="nested-key"><strong>{{prettyNameAttestation(item.key)}}</strong></div>
-                <div class="nested-value">
-                  <ng-container *ngIf="isObject(item.value) || isArray(item.value)">
-                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.value }"></ng-container>
-                  </ng-container>
-                  <ng-container *ngIf="!isObject(item.value) && !isArray(item.value)">
-                    {{item.value}}
-                  </ng-container>
-                </div>
-              </div>
-            </ng-container>
-          </ng-container>
-          <ng-container *ngIf="isArray(value)">
-            <ng-container *ngFor="let item of value; let i = index; trackBy: trackByFn">
-              <div class="nested-item">
-                <div class="nested-key"><strong>[{{i}}]</strong>:</div>
-                <div class="nested-value">
-                  <ng-container *ngIf="isObject(item) || isArray(item)">
-                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item }"></ng-container>
-                  </ng-container>
-                  <ng-container *ngIf="!isObject(item) && !isArray(item)">
-                    {{item}}
-                  </ng-container>
-                </div>
-              </div>
-            </ng-container>
+                <ng-template #plainText>
+                  <span [innerHTML]="option.value" style="display: flex; padding-top: 1em"></span>
+                </ng-template>
+              </span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
           </ng-container>
         </mat-list>
-      </ng-template>
-    </mat-tab>
-
-    <mat-tab *ngIf="attestation.metadata && attestation.metadata.length > 0" label="Metadata">
-      <mat-list>
-        <mat-list-item *ngFor="let option of attestation.metadata">
-          <span matListItemTitle>
-            <strong>{{prettyNameAttestation(option.key)}}</strong>
-          </span>
-          <span matListItemLine>
-            <span [innerHTML]="option.value"></span>
-          </span>
-        </mat-list-item>
-      </mat-list>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+  
+        <!-- Recursive template for nested lists -->
+        <ng-template #recursiveList let-value>
+          <mat-list class="nested-list">
+            <ng-container *ngIf="isObject(value)">
+              <ng-container *ngFor="let item of objectToKeyValue(value); trackBy: trackByFn">
+                <div class="nested-item">
+                  <div class="nested-key"><strong>{{prettyNameAttestation(item.key)}}</strong></div>
+                  <div class="nested-value">
+                    <ng-container *ngIf="isObject(item.value) || isArray(item.value)">
+                      <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.value }"></ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!isObject(item.value) && !isArray(item.value)">
+                      {{item.value}}
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="isArray(value)">
+              <ng-container *ngFor="let item of value; let i = index; trackBy: trackByFn">
+                <div class="nested-item">
+                  <div class="nested-key"><strong>[{{i}}]</strong>:</div>
+                  <div class="nested-value">
+                    <ng-container *ngIf="isObject(item) || isArray(item)">
+                      <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item }"></ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!isObject(item) && !isArray(item)">
+                      {{item}}
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </mat-list>
+        </ng-template>
+  </mat-card-content>
+</mat-card>

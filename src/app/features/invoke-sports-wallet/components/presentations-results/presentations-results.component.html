@@ -29,19 +29,9 @@
                 </mat-card-header>
               </mat-card>
 
-              <mat-card *ngIf="!isErrored(attestation)" appearance="outlined">
-                <mat-card-header>
-                  <mat-card-title>{{ prettyNameAttestation(attestation.name) }}</mat-card-title>
-                  <mat-card-subtitle>
-                    in <i> {{ attestation.format }} </i> format</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>The content</p>
-                </mat-card-content>
-                <mat-card-actions align="end">
-                  <vc-view-attestation [attestation]="attestation"></vc-view-attestation>
-                </mat-card-actions>
-              </mat-card>
+              <ng-container *ngIf="!isErrored(attestation)" appearance="outlined">                
+                <vc-view-attestation [attestation]="attestation"></vc-view-attestation>
+              </ng-container>
             </ng-container>
           </div>
         </ng-container>
