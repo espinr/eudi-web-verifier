@@ -35,4 +35,23 @@
   .menu {
     line-height: 6rem;
   }
+  
+  @media (width <= 700px) {
+    h1 {
+      font-size: 16pt; 
+      margin: 0;
+      line-height: 4rem; 
+      vertical-align: middle; 
+      text-transform: uppercase; 
+      font-weight: bold; 
+      color: #669bbc;
+    }
+    img.header-logo {
+      line-height: 4rem; 
+      height:4rem;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+    }
+      
+  }
 }

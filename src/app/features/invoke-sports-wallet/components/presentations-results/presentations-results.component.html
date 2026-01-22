@@ -35,21 +35,20 @@
             </ng-container>
           </div>
         </ng-container>
-      </mat-expansion-panel>
-
-      
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Claims requested in JSON...</mat-panel-title>
-        </mat-expansion-panel-header>
-        <vc-editor [editable]="false" [code]="presentationQuery"></vc-editor>
-      </mat-expansion-panel>
-  
-      <div class="documents-and-log">
-        <span>...and the interaction with the wallet...</span>
-        <a mat-button (click)="openLogs()">logs</a>
-      </div>
-  
+      </mat-expansion-panel>  
     </ng-container>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Claims requested in JSON...</mat-panel-title>
+      </mat-expansion-panel-header>
+      <vc-editor [editable]="false" [code]="presentationQuery"></vc-editor>
+    </mat-expansion-panel>
+
+    <div class="documents-and-log">
+      <span>...and the interaction with the wallet...</span>
+      <a mat-button (click)="openLogs()">logs</a>
+    </div>
+
   </div>
 </div>
