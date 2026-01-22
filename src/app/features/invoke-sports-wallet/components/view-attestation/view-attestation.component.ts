@@ -24,7 +24,6 @@ import { CredentialDictionaryService } from '@app/core/services/credential-dicti
     SharedModule,
     MatExpansionModule,
     MatListModule,
-    MatDialogModule,
     MatButtonModule,
     MatTabsModule,
     MatDividerModule,
