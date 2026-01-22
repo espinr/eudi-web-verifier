@@ -16,4 +16,18 @@
     display: flex;
     justify-content: space-between;
   }
+
+  h1 {
+    font-size: 20pt; 
+    line-height: 3rem; 
+    vertical-align: middle; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+    color: navy;
+  }
+  img.header-logo {
+    line-height: 3rem; 
+    vertical-align: middle;
+    margin-left: 1rem;
+  }
 }
