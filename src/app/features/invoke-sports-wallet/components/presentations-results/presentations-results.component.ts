@@ -32,7 +32,7 @@ import { CredentialDictionaryService } from '@app/core/services/credential-dicti
     styleUrls: ['./presentations-results.component.scss']
 })
 export class PresentationsResultsComponent implements OnInit {
-  credentialDictionary!: CredentialDictionaryService;
+  credentialDictionary: CredentialDictionaryService = new CredentialDictionaryService();
 
   constructor(
     private readonly responseProcessor: WalletResponseProcessorService
@@ -42,7 +42,6 @@ export class PresentationsResultsComponent implements OnInit {
   @Input() concludedTransaction!: ConcludedTransaction;
   presentationQuery!: PresentationQuery;
   attestationsPerQuery: {[queryId: string]: Observable<(Single | Errored)[]>} = {}
-  
   readonly dialog: MatDialog = inject(MatDialog);
 
   ngOnInit(): void {
@@ -52,16 +51,6 @@ export class PresentationsResultsComponent implements OnInit {
 
   isErrored(it: Single | Errored): it is Errored {
     return it.kind === 'error' as const
-  }
-
-  viewContents(attestation: Single) {
-    this.dialog.open(ViewAttestationComponent, {
-      data: {
-        attestation: attestation
-      },
-      height: '70%',
-      width: '60%',
-    });
   }
 
   prettyNameAttestation(code: string) {

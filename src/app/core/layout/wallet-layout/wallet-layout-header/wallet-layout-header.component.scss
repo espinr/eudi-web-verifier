@@ -19,15 +19,20 @@
 
   h1 {
     font-size: 20pt; 
-    line-height: 3rem; 
+    margin: 0;
+    line-height: 6rem; 
     vertical-align: middle; 
     text-transform: uppercase; 
     font-weight: bold; 
     color: #669bbc;
   }
   img.header-logo {
-    line-height: 3rem; 
+    line-height: 6rem; 
+    height:6rem;
     vertical-align: middle;
     margin-left: 1rem;
+  }
+  .menu {
+    line-height: 6rem;
   }
 }
