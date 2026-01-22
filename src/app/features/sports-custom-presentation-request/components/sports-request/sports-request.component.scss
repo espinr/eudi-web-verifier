@@ -2,5 +2,8 @@
 @use "sass:map";
 
 :host {
-
+    h3 {
+        font-size: large; 
+        color: #669bbc
+    }
 }

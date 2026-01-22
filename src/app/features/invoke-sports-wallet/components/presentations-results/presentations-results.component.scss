@@ -13,4 +13,8 @@
             align-items: center;
         }
     }
+    .header-image {
+        background-image: url('/assets/logo.png');
+        background-size: cover;
+    }
 }

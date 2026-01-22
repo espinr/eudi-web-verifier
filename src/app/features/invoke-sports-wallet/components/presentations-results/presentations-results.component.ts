@@ -13,6 +13,7 @@ import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {OpenLogsComponent} from "@shared/elements/open-logs/open-logs.component";
 import {Observable} from "rxjs";
 import {PresentationQuery} from '@app/core/models/TransactionInitializationRequest';
+import { CredentialDictionaryService } from '@app/core/services/credential-dictionary.service';
 
 @Component({
     selector: 'vc-presentations-results',
@@ -23,13 +24,16 @@ import {PresentationQuery} from '@app/core/models/TransactionInitializationReque
         MatExpansionModule,
         MatCardModule,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        ViewAttestationComponent
     ],
     providers: [WalletResponseProcessorService],
     templateUrl: './presentations-results.component.html',
     styleUrls: ['./presentations-results.component.scss']
 })
 export class PresentationsResultsComponent implements OnInit {
+  credentialDictionary!: CredentialDictionaryService;
+
   constructor(
     private readonly responseProcessor: WalletResponseProcessorService
   ) {
@@ -58,6 +62,10 @@ export class PresentationsResultsComponent implements OnInit {
       height: '70%',
       width: '60%',
     });
+  }
+
+  prettyNameAttestation(code: string) {
+    return this.credentialDictionary.getAttribute(code);
   }
 
   openLogs() {

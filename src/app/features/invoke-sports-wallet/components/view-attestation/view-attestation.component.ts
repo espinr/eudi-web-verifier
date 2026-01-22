@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  Input,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,11 +11,10 @@ import { JWTService } from '@core/services/jwt.service';
 import { Single } from '@core/models/presentation/PresentedAttestation';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { DialogData } from '@features/invoke-sports-wallet/components/view-attestation/model/DialogData';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import {AttestationFormat} from "@core/models/attestation/AttestationFormat";
 import { CredentialDictionaryService } from '@app/core/services/credential-dictionary.service';
 
 @Component({
@@ -35,13 +35,15 @@ import { CredentialDictionaryService } from '@app/core/services/credential-dicti
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewAttestationComponent implements OnInit {
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
-  attestation!: Single;
+ 
+  @Input() attestation: Single = { 
+    kind: "single", format: AttestationFormat.MSO_MDOC, name: "", attributes: [], metadata: [] 
+  };
+
   credentialDictionary!: CredentialDictionaryService;
 
 
   ngOnInit(): void {
-    this.attestation = this.data.attestation;
     this.credentialDictionary = new CredentialDictionaryService();
 
   }
