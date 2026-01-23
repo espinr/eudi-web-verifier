@@ -86,8 +86,8 @@ export class ViewAttestationComponent implements OnInit {
     }
   }
 
-  isNationality(key: string, value:any): boolean {
-    return key.includes('nationality') && value.typeof === 'Array';
+  isNationality(key: string, value: any): boolean {
+    return key.includes('nationality') && this.isArray(value);
   }
 
   getUrlFlag(value: string): string {
