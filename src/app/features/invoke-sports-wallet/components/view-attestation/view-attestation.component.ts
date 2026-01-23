@@ -87,9 +87,13 @@ export class ViewAttestationComponent implements OnInit {
   }
 
   isNationality(key: string, value: any): boolean {
-    console.log(key);
-    console.log(value);
-    return key.includes('nationality') && this.isArray(value);
+    try {
+      let json = JSON.parse(value);
+      return key.includes('nationality') && this.isArray(json);
+    } catch (e) {
+      console.error('Error parsing the JSON');
+      return false;
+    }
   }
 
   getUrlFlag(value: string): string {
