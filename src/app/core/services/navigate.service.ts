@@ -13,7 +13,7 @@ export class NavigateService {
 	) {}
 
 	goHome () {
-		this.navigateTo('home');
+		this.navigateTo('custom-sports');
 	}
 	goBack () {
 		this.location.back();

@@ -3,19 +3,18 @@
     <ng-container *ngFor="let entry of attestationsPerQuery | keyvalue; let indexOfelement=index;">
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
-          <mat-panel-title><span>For query #{{ indexOfelement }}:</span>
+          <mat-panel-title><span>Query #{{ indexOfelement }}...</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <ng-container *ngIf="entry.value | async as attestations">
           <div>
-            Received <strong>{{ attestations.length }}</strong> document with attestations
+            ...received <strong>{{ attestations.length }}</strong> document with the following attestations:
           </div>
           <div class="result-container">
             <ng-container *ngFor="let attestation of attestations">
               <mat-card *ngIf="isErrored(attestation)" appearance="outlined">
                 <mat-card-header>
-                  <div mat-card-avatar class="header-image"></div>
                   <mat-card-title
                     >Error: {{ attestation.reason }}</mat-card-title
                   >
