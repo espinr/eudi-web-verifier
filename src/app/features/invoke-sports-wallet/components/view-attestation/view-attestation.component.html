@@ -23,7 +23,7 @@
                   <ng-container *ngIf="!isDate(option.key, option.value) && !isPicture(option.key, option.value) && isNationality(option.key, option.value)">
                     <ng-container *ngTemplateOutlet="recursiveListCountries; context:{ $implicit: parseJson(option.value) }"></ng-container>
                   </ng-container>
-                  <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value) && !&& isNationality(option.key, option.value))">
+                  <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value) && !isNationality(option.key, option.value))">
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
                   </ng-container>
                 </ng-container>
