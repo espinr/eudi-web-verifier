@@ -97,11 +97,22 @@ export class ViewAttestationComponent implements OnInit {
     }
   }
 
-  parseDate(value: string): any {
+
+  prettyPrintValue(key: string, value:any): string {
+      if (key.includes('qualified')) {
+        return value==='true'? 'Participation is allowed <span class="valid-attribute">✅</span>' : '<span class="valid-attribute">❌</span>'; 
+      }
+      if (key.includes('banned')) {
+        return value==='true'?  'Banned <span class="valid-attribute">❌</span>' : '(No) Participation is allowed <span class="valid-attribute">✅</span>'; 
+      }
+      return value;
+  }
+
+  prettyDate(value: string): any {
     try {
       let json = JSON.parse(value);
       let parsedDate = Date.parse(json.value);
-      let isValidEmoji = parsedDate > Date.now()? '✅' : '❌';     
+      let isValidEmoji = parsedDate > Date.now()? '<span class="valid-attribute">✅</span>' : '<span class="valid-attribute">❌</span>';     
       return `${json.value} ${isValidEmoji} `;
     } catch (e) {
       console.error('Invalid JSON string:', value);
