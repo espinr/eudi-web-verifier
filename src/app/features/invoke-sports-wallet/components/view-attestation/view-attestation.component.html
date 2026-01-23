@@ -1,5 +1,6 @@
 <mat-card appearance="outlined" class="mat-typography">
   <mat-card-header>
+    <div mat-card-avatar [class]="classAttestation(attestation.name)"></div>
     <mat-card-title>{{ prettyNameAttestation(attestation.name) }}</mat-card-title>
     <mat-card-subtitle>
       in <i> {{ attestation.format }} </i> format</mat-card-subtitle>

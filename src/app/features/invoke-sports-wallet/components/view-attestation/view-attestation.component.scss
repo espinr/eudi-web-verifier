@@ -43,6 +43,20 @@
     .portrait {
         max-height: 100px;
     }
+
+    .health-avatar {
+        background-image: url('/assets/health.png');
+        background-size: cover;
+    }
+    .license-avatar {
+        background-image: url('/assets/license.png');
+        background-size: cover;
+    }
+    .sample-avatar {
+        background-image: url('/assets/logo.png');
+        background-size: cover;
+    }
+    
 }
 
 

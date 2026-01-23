@@ -49,7 +49,7 @@ export class ViewAttestationComponent implements OnInit {
 
   }
 
-  prettyNameAttestation(code: string) {
+  prettyNameAttestation(code: string): string {
     return this.credentialDictionary.getAttribute(code);
   }
 
@@ -97,6 +97,15 @@ export class ViewAttestationComponent implements OnInit {
     }
   }
 
+  classAttestation(key: string): string {
+    if (key === 'net.openathletics.health.1') {
+      return 'health-avatar';
+    }
+    if (key === 'net.openathletics.license.1') {
+      return 'license-avatar';
+    }
+    return 'sample-avatar';
+  }
 
   prettyPrintValue(key: string, value:any): string {
       if (key.includes('qualified')) {

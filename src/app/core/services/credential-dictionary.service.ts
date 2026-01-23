@@ -24,4 +24,5 @@ export class CredentialDictionaryService {
   hasAttribute(code: string): boolean {
     return code in this.credentials;
   }
+
 }
