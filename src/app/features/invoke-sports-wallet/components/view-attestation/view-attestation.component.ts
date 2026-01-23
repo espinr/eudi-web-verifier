@@ -86,6 +86,14 @@ export class ViewAttestationComponent implements OnInit {
     }
   }
 
+  isNationality(key: string, value:any): boolean {
+    return key.includes('nationality') && value.typeof === 'Array';
+  }
+
+  getUrlFlag(value: string): string {
+    return `https://flagsapi.com/${value}/flat/32.png`;
+  }
+
   // Portrait {"type":"Buffer","data": format
   isPicture(key: string, value:any): boolean {
     try {

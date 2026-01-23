@@ -20,7 +20,10 @@
                   <ng-container *ngIf="!isDate(option.key, option.value) && isPicture(option.key, option.value)">
                     <img class="portrait" [src]="getImageFromBuffer(option.value)" alt="Portrait">
                   </ng-container>
-                  <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value))">
+                  <ng-container *ngIf="!isDate(option.key, option.value) && !isPicture(option.key, option.value) && isNationality(option.key, option.value)">
+                    <ng-container *ngTemplateOutlet="recursiveListCountries; context:{ $implicit: parseJson(option.value) }"></ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="(!isDate(option.key, option.value) && !isPicture(option.key, option.value) && !&& isNationality(option.key, option.value))">
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: parseJson(option.value) }"></ng-container>
                   </ng-container>
                 </ng-container>
@@ -54,7 +57,7 @@
             <ng-container *ngIf="isArray(value)">
               <ng-container *ngFor="let item of value; let i = index; trackBy: trackByFn">
                 <div class="nested-item">
-                  <div class="nested-key"><strong>[{{i}}]</strong>:</div>
+                  <!--div class="nested-key"><strong>[{{i}}]</strong>:</div -->
                   <div class="nested-value">
                     <ng-container *ngIf="isObject(item) || isArray(item)">
                       <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item }"></ng-container>
@@ -68,5 +71,22 @@
             </ng-container>
           </mat-list>
         </ng-template>
+
+        <!-- For countries -->
+        <ng-template #recursiveListCountries let-value>
+          <mat-list class="nested-list">
+            <ng-container *ngIf="isArray(value)">
+              <ng-container *ngFor="let item of value; let i = index; trackBy: trackByFn">
+                <div class="nested-item">
+                  <div class="nested-value">
+                    <ng-container *ngIf="!isObject(item) && !isArray(item)">
+                      <img [src]="getUrlFlag(item)" [alt]="item">
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </mat-list>
+        </ng-template>         
   </mat-card-content>
 </mat-card>
