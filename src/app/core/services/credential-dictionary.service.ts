@@ -12,7 +12,9 @@ export class CredentialDictionaryService {
     'net.openathletics.license.1:portrait': 'Portrait',
     'net.openathletics.license.1:qualified_competitor_nationals_2026': 'Qualified to Nationals 2026?',
     'net.openathletics.health.1:expiry_date': 'Self-declaration expiry date',
-    'net.openathletics.health.1:issuing_authority': 'Issuing authority'
+    'net.openathletics.health.1:issuing_authority': 'Issuing authority',
+    'net.openathletics.health.1:nationality': 'Nationalities',
+    'net.openathletics.health.1:category': 'Competition category'    
   };
 
   // Method to get value by key

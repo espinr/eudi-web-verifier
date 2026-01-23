@@ -50,6 +50,20 @@
                 "portrait"
               ],
               "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "nationality"
+              ],
+              "intent_to_retain": false
+            },
+            {
+              "path": [
+                "net.openathletics.license.1",
+                "category"
+              ],
+              "intent_to_retain": false
             }
           ]
         },
