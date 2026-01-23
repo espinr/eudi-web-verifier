@@ -1,10 +1,5 @@
 <div>
   <div class="result-container">
-
-    <!-- licensing by iconisme from <a href="https://thenounproject.com/browse/icons/term/licensing/" target="_blank" title="licensing Icons">Noun Project</a> (CC BY 3.0)
-     Health by Graphtend from <a href="https://thenounproject.com/browse/icons/term/health/" target="_blank" title="Health Icons">Noun Project</a> (CC BY 3.0) 
-     -->
-
     <ng-container *ngFor="let entry of attestationsPerQuery | keyvalue; let indexOfelement=index;">
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
@@ -51,6 +46,7 @@
       <span>...and the interaction with the wallet...</span>
       <a mat-button (click)="openLogs()">logs</a>
     </div>
-
   </div>
+  <div class="imageAttribution">licensing by iconisme from <a href="https://thenounproject.com/browse/icons/term/licensing/" target="_blank" title="licensing Icons">Noun Project</a> (CC BY 3.0)
+    Health by Graphtend from <a href="https://thenounproject.com/browse/icons/term/health/" target="_blank" title="Health Icons">Noun Project</a> (CC BY 3.0)</div>
 </div>
