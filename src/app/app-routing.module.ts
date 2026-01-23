@@ -6,7 +6,7 @@ import { VerifierEndpointService } from '@core/services/verifier-endpoint.servic
 import { WalletRedirectComponent } from './features/wallet-redirect/wallet-redirect.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'custom-sports', pathMatch: 'full' },
   {
     path: 'home',
     loadComponent: () =>
