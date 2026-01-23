@@ -87,6 +87,8 @@ export class ViewAttestationComponent implements OnInit {
   }
 
   isNationality(key: string, value: any): boolean {
+    console.log(key);
+    console.log(value);
     return key.includes('nationality') && this.isArray(value);
   }
 
