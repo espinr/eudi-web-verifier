@@ -1,21 +1,102 @@
-# VerifierUi
+# EUDI-Compatible Sports Wallet - Verifier Frontend
 
-**Important!** Before you proceed, please read
-the [EUDI Wallet Reference Implementation project description](https://github.com/eu-digital-identity-wallet/.github/blob/main/profile/reference-implementation.md)
+This project is a proof of concept to show the feasibility of applying EUDI Wallet standards to the decentralized nature of credentials in regulated sports. This project was developed under the scope of [W3C OpenAthletics Community Group](https://www.w3.org/community/opentrack/) and motivated by the outcomes of [AthTech'25](https://athtech.run/2025). The implementation is an adaptation of the [official EUDI Android Wallet reference app](https://github.com/eu-digital-identity-wallet/).
+
+In this project you can find new document definitions required to implement the main [use cases and scenarios for sports credentials](https://www.w3.org/community/opentrack/2026/04/03/use-cases-of-decentralized-sports-credentials/).    
+
+
+## Related repositories
+
+If you want to test or reuse this project, just use the existing servers deployed or get all the software components in the following repositories:
+
+* WALLET NATIVE APP
+  * Wallet for Android: https://github.com/espinr/eudi-app-android  
+  * Backend for the Wallet: https://github.com/espinr/eudi-srv-wallet-provider
+
+* VERIFIER (PROXIMITY)
+  * Verifier for Android (Based on Multipaz): https://github.com/espinr/eudi-app-multiplatform-verifier-ui
+
+* ISSUANCE SERVICE:
+  * Status list server: https://github.com/espinr/eudi-srv-statuslist-py
+  * OIDC server: https://github.com/espinr/eudi-srv-issuer-oidc-py
+  * APIs for the backend: https://github.com/espinr/eudi-srv-web-issuing-eudiw-py
+  * Frontend: https://github.com/espinr/eudi-srv-web-issuing-frontend-eudiw-py
+
+* ONLINE VERIFICATION SERVICE:
+  * Backend APIs: https://github.com/espinr/eudi-srv-web-verifier-endpoint
+  * Frontend (this repo): https://github.com/espinr/eudi-web-verifier
+
+The issuance and verification services can be deployed easily using Docker Compose. 
+
+## Issuance service orchestration using `docker-compose`
+
+For an easy deployment, this project can be configured using Docker and `docker-compose` in particular.
+
+### Organization of directories and services
+
+The server would require a structure of directories with the content of the issuance-related repositories listed above, including: 
+
+```
+docker                            // docker-compose.yml and HTTP server configuration
+eudi-srv-web-verifier-endpoint    // backend
+eudi-web-verifier                 // frontend
+```
+
+`docker/` includes the `docker-compose.yml` file and HTTP server configuration, including the SSL certificate.
+
+```
+docker-compose.yaml
+haproxy.conf
+haproxy.pem
+```
+
+### `docker-compose.yml` 
+
+```
+version: '3.3'
+services:
+  verifier:
+    # Local image must be built with `./gradlew bootBuildImage` in the eudi-srv-web-verifier-endpoint project
+    image: net.openathletics.eudi/eudi-srv-web-verifier-endpoint:latest
+    container_name: verifier-backend
+    ports:
+      - "8080:8080"
+    environment:
+      VERIFIER_PUBLICURL: "https://verifier.example.org"
+      VERIFIER_RESPONSE_MODE: "DirectPost"
+      VERIFIER_ORIGINALCLIENTID: "verifier"
+      VERIFIER_CLIENTIDPREFIX: "pre-registered"
+
+  verifier-ui:
+    #image: ghcr.io/eu-digital-identity-wallet/eudi-web-verifier:v0.9.1
+    build: ../eudi-web-verifier/
+    container_name: verifier-ui
+    ports:
+      - "4300:4300"
+    environment:
+      - DOMAIN_NAME=""
+      - HOST_API="https://verifier.example.org"
+  
+  haproxy:
+    image: haproxy:2.7.2
+    container_name: haproxy
+    ports:
+      - "443:443"
+    volumes:
+      - ./haproxy.conf:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy.pem:/etc/ssl/certs/mysite.pem
+```
+
+
+----
+
+:heavy_exclamation_mark: **Important!** For more information about the base of the original project, please read the [EUDI Wallet Reference Implementation project description](https://github.com/eu-digital-identity-wallet/.github/blob/main/profile/reference-implementation.md)
+
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-## Table of contents
 
-* [Overview](#overview)
-* [Development server](#development-server)
-* [Code scaffolding](#code-scaffolding)
-* [Build](#build)
-* [How to run for development](#how-to-run-for-development)
-* [Running tests](#running-tests)
-* [License](#license)
-
-## Overview
+## About the Verifier Frontend 
 
 This is a WEB UI that provides functionality to interact with the Verifier/RP trusted end-point implemented [here](https://github.com/eu-digital-identity-wallet/eudi-srv-web-verifier-endpoint-23220-4-kt).
 Another way to think of this application is that it represents an arbitrary application that wants to delegate to the trusted end-point the burden of
