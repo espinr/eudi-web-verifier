@@ -56,7 +56,7 @@ haproxy.pem
 version: '3.3'
 services:
   verifier:
-    # Local image must be built with `./gradlew bootBuildImage` in the eudi-srv-web-verifier-endpoint project
+    # Local image must be built with `./gradlew bootBuildImage` in eudi-srv-web-verifier-endpoint
     image: net.openathletics.eudi/eudi-srv-web-verifier-endpoint:latest
     container_name: verifier-backend
     ports:
